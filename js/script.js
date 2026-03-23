@@ -15,19 +15,169 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
-// Google Search
+document.addEventListener("DOMContentLoaded", function () {
+  // Settings modal logic
+  const settingsBtn = document.getElementById("settingsBtn");
+  const settingsModal = document.getElementById("settingsModal");
+  const settingsClose = document.getElementById("settingsClose");
+  const shortcutForm = document.getElementById("shortcutForm");
+  const shortcutName = document.getElementById("shortcutName");
+  const shortcutValue = document.getElementById("shortcutValue");
+  const shortcutsList = document.getElementById("shortcutsList");
+  const linksDiv = document.querySelector(".links");
 
-// listens for Enter in search box
-
-// Google Search
-// Listen for Enter key in search box
-// Redirect to Google search with query
-
-document.getElementById("search").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    const q = e.target.value.trim();
-    if (q !== "") {
-      window.location.href = `https://duckduckgo.com/?q=${encodeURIComponent(q)}`;
+  function getShortcuts() {
+    const raw = localStorage.getItem("userShortcuts");
+    return raw ? JSON.parse(raw) : [];
+  }
+  function setShortcuts(shortcuts) {
+    localStorage.setItem("userShortcuts", JSON.stringify(shortcuts));
+  }
+  function renderShortcuts() {
+    const shortcuts = getShortcuts();
+    shortcutsList.innerHTML = "";
+    if (shortcuts.length === 0) {
+      shortcutsList.innerHTML =
+        '<div style="color: var(--muted); text-align:center;">No shortcuts added yet.</div>';
+      return;
     }
+    shortcuts.forEach((s, idx) => {
+      const item = document.createElement("div");
+      item.className = "shortcut-item";
+      item.innerHTML = `
+        <div style="flex:1">
+          <strong>${s.name}</strong><br>
+          <span style=\"color:var(--muted); font-size: 13px;\">${s.value}</span>
+        </div>
+        <div class="shortcut-actions">
+          <button class="links-btn edit-btn" data-idx="${idx}">Edit</button>
+          <button class="links-btn delete-btn" data-idx="${idx}" style="background:#ee4444; color:#fff;">Delete</button>
+        </div>
+      `;
+      shortcutsList.appendChild(item);
+    });
+    Array.from(shortcutsList.getElementsByClassName("edit-btn")).forEach(
+      (btn) => {
+        btn.addEventListener("click", function (e) {
+          const i = this.getAttribute("data-idx");
+          beginEditShortcut(i);
+        });
+      },
+    );
+    Array.from(shortcutsList.getElementsByClassName("delete-btn")).forEach(
+      (btn) => {
+        btn.addEventListener("click", function (e) {
+          const i = Number(this.getAttribute("data-idx"));
+          let shortcuts = getShortcuts();
+          shortcuts.splice(i, 1);
+          setShortcuts(shortcuts);
+          renderShortcuts();
+          renderMainShortcuts();
+        });
+      },
+    );
+  }
+  function beginEditShortcut(index) {
+    const shortcuts = getShortcuts();
+    const s = shortcuts[index];
+    shortcutsList.innerHTML = "";
+    const editForm = document.createElement("form");
+    editForm.className = "shortcut-form";
+    editForm.innerHTML = `
+      <input type="text" id="editShortcutName" value="${s.name}" required />
+      <input type="text" id="editShortcutValue" value="${s.value}" required />
+      <button type="submit" class="links-btn">Save</button>
+      <button type="button" id="cancelEdit" class="links-btn" style="background:#aaa;">Cancel</button>
+    `;
+    shortcutsList.appendChild(editForm);
+    document.getElementById("editShortcutName").focus();
+    editForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      shortcuts[index] = {
+        name: document.getElementById("editShortcutName").value.trim(),
+        value: document.getElementById("editShortcutValue").value.trim(),
+      };
+      setShortcuts(shortcuts);
+      renderShortcuts();
+      renderMainShortcuts();
+    });
+    document
+      .getElementById("cancelEdit")
+      .addEventListener("click", function () {
+        renderShortcuts();
+      });
+  }
+  function createShortcutLink(name, value) {
+    const a = document.createElement("a");
+    a.href = value;
+    a.title = name;
+    a.textContent = name;
+    a.style.display = "flex";
+    a.style.alignItems = "center";
+    a.style.gap = "6px";
+    // (optional) Add an icon or initial for shortcuts
+    return a;
+  }
+  function renderMainShortcuts() {
+    const shortcuts = getShortcuts();
+    // Remove previously added shortcut links
+    Array.from(linksDiv.querySelectorAll(".user-shortcut")).forEach((el) =>
+      el.remove(),
+    );
+    shortcuts.forEach((s) => {
+      const el = createShortcutLink(s.name, s.value);
+      el.classList.add("user-shortcut");
+      linksDiv.appendChild(el);
+    });
+  }
+
+  if (settingsBtn && settingsModal && settingsClose) {
+    settingsBtn.addEventListener("click", function () {
+      settingsModal.style.display = "block";
+      renderShortcuts();
+    });
+
+    settingsClose.addEventListener("click", function () {
+      settingsModal.style.display = "none";
+    });
+
+    // Close modal on click outside content
+    window.addEventListener("click", function (event) {
+      if (event.target == settingsModal) {
+        settingsModal.style.display = "none";
+      }
+    });
+  }
+
+  // Add shortcut
+  if (shortcutForm) {
+    shortcutForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const name = shortcutName.value.trim();
+      const value = shortcutValue.value.trim();
+      if (!name || !value) return;
+      let shortcuts = getShortcuts();
+      shortcuts.push({ name, value });
+      setShortcuts(shortcuts);
+      shortcutForm.reset();
+      renderShortcuts();
+      renderMainShortcuts();
+    });
+  }
+
+  // Render user shortcuts on startup
+  renderMainShortcuts();
+
+  // Google Search
+  const searchBox = document.getElementById("search");
+  if (searchBox) {
+    searchBox.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const q = e.target.value.trim();
+        if (q !== "") {
+          window.location.href = `https://duckduckgo.com/?q=${encodeURIComponent(q)}`;
+        }
+      }
+    });
   }
 });

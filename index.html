@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
-    <title>Homepage</title>
+    <title>homerc</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <button id="settingsBtn" class="settings-btn" title="Settings">
+      <i class="fas fa-cog"></i>
+    </button>
     <div class="container">
       <div id="time">00:00</div>
 
@@ -273,5 +276,29 @@
     <script src="js/script.js"></script>
     <script src="js/canvasTemplates.js"></script>
     <script src="js/canvas.js"></script>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal">
+      <div class="settings-modal-content">
+        <span id="settingsClose" class="settings-close">&times;</span>
+        <h2>Shortcut Settings</h2>
+        <form id="shortcutForm" class="shortcut-form">
+          <input
+            type="text"
+            id="shortcutName"
+            placeholder="Shortcut Name"
+            required
+          />
+          <input
+            type="text"
+            id="shortcutValue"
+            placeholder="Shortcut / URL"
+            required
+          />
+          <button type="submit" class="links-btn">Add Shortcut</button>
+        </form>
+        <div id="shortcutsList" class="shortcuts-list"></div>
+      </div>
+    </div>
   </body>
 </html>
