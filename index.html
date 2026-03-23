@@ -297,6 +297,38 @@
           />
           <button type="submit" class="links-btn">Add Shortcut</button>
         </form>
+        <div
+          style="
+            margin: 16px 0 22px;
+            border-top: 1px solid var(--panel);
+            padding-top: 14px;
+          "
+        >
+          <label style="font-weight: 500">Upload Background Image:</label><br />
+          <input
+            type="file"
+            id="bgImageInput"
+            accept="image/*"
+            style="margin-top: 7px"
+          />
+          <button
+            type="button"
+            id="removeBgBtn"
+            style="
+              margin-top: 7px;
+              background: #b92b2b;
+              color: #fff;
+              border: none;
+              border-radius: 5px;
+              padding: 5px 13px;
+              cursor: pointer;
+              font-size: 15px;
+            "
+          >
+            Remove
+          </button>
+          <div id="bgPreview" style="margin-top: 8px"></div>
+        </div>
         <div id="shortcutsList" class="shortcuts-list"></div>
       </div>
     </div>
