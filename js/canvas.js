@@ -1,29 +1,31 @@
 // Canvas Feature extracted from script.js
 let canvasElem, canvasCtx;
-let currentTemplate = 'blank';
+let currentTemplate = "blank";
 
 // Import templates
 let CanvasTemplates;
 (function loadTemplates() {
-  const script = document.createElement('script');
-  script.src = 'js/canvasTemplates.js';
-  script.onload = () => { CanvasTemplates = CanvasTemplates || window.CanvasTemplates; };
+  const script = document.createElement("script");
+  script.src = "js/canvasTemplates.js";
+  script.onload = () => {
+    CanvasTemplates = CanvasTemplates || window.CanvasTemplates;
+  };
   document.head.appendChild(script);
 })();
 let isDrawing = false;
-let currentColor = '#ffffff';
+let currentColor = "#ffffff";
 let currentSize = 5;
 let strokePoints = [];
 
-const openCanvasBtn = document.getElementById('openCanvasBtn');
-const canvasOverlay = document.getElementById('canvasOverlay');
-const canvasColor = document.getElementById('canvasColor');
-const canvasBrush = document.getElementById('canvasBrush');
-const canvasClear = document.getElementById('canvasClear');
-const canvasSave = document.getElementById('canvasSave');
-const canvasClose = document.getElementById('canvasClose');
-const canvasUndo = document.getElementById('canvasUndo');
-const canvasRedo = document.getElementById('canvasRedo');
+const openCanvasBtn = document.getElementById("openCanvasBtn");
+const canvasOverlay = document.getElementById("canvasOverlay");
+const canvasColor = document.getElementById("canvasColor");
+const canvasBrush = document.getElementById("canvasBrush");
+const canvasClear = document.getElementById("canvasClear");
+const canvasSave = document.getElementById("canvasSave");
+const canvasClose = document.getElementById("canvasClose");
+const canvasUndo = document.getElementById("canvasUndo");
+const canvasRedo = document.getElementById("canvasRedo");
 
 // Canvas history stacks
 let undoStack = [];
@@ -31,18 +33,22 @@ let redoStack = [];
 const MAX_HISTORY = 50;
 
 function showCanvasOverlay() {
-  canvasOverlay.style.display = 'flex';
+  canvasOverlay.style.display = "flex";
   resizeCanvas();
-  window.addEventListener('keydown', canvasKeyHandler);
+  window.addEventListener("keydown", canvasKeyHandler);
 }
 function hideCanvasOverlay() {
-  canvasOverlay.style.display = 'none';
-  window.removeEventListener('keydown', canvasKeyHandler);
+  canvasOverlay.style.display = "none";
+  window.removeEventListener("keydown", canvasKeyHandler);
 }
 
 function resizeCanvas() {
   if (CanvasTemplates && currentTemplate && CanvasTemplates[currentTemplate]) {
-    CanvasTemplates[currentTemplate](canvasCtx, window.innerWidth, window.innerHeight);
+    CanvasTemplates[currentTemplate](
+      canvasCtx,
+      window.innerWidth,
+      window.innerHeight,
+    );
   }
   if (!canvasElem) return;
   // Save canvas contents
@@ -53,8 +59,8 @@ function resizeCanvas() {
   // Resize canvas to viewport
   canvasElem.width = window.innerWidth;
   canvasElem.height = window.innerHeight;
-  canvasCtx.lineCap = 'round';
-  canvasCtx.lineJoin = 'round';
+  canvasCtx.lineCap = "round";
+  canvasCtx.lineJoin = "round";
 
   // Restore canvas contents
   const img = new window.Image();
@@ -141,8 +147,8 @@ function clearCanvas() {
 }
 
 function saveCanvas() {
-  const link = document.createElement('a');
-  link.download = 'canvas-drawing.png';
+  const link = document.createElement("a");
+  link.download = "canvas-drawing.png";
   link.href = canvasElem.toDataURL();
   link.click();
 }
@@ -180,30 +186,35 @@ function restoreCanvasState(dataURL) {
 }
 
 function initCanvasEvents() {
-  canvasElem.addEventListener('mousedown', startDrawing);
-  canvasElem.addEventListener('mousemove', draw);
-  canvasElem.addEventListener('mouseup', stopDrawing);
-  canvasElem.addEventListener('mouseout', stopDrawing);
+  canvasElem.addEventListener("mousedown", startDrawing);
+  canvasElem.addEventListener("mousemove", draw);
+  canvasElem.addEventListener("mouseup", stopDrawing);
+  canvasElem.addEventListener("mouseout", stopDrawing);
 
   // Touch events for mobile
-  canvasElem.addEventListener('touchstart', startDrawing);
-  canvasElem.addEventListener('touchmove', draw);
-  canvasElem.addEventListener('touchend', stopDrawing);
+  canvasElem.addEventListener("touchstart", startDrawing);
+  canvasElem.addEventListener("touchmove", draw);
+  canvasElem.addEventListener("touchend", stopDrawing);
 
-  canvasColor.addEventListener('change', e => { currentColor = e.target.value; });
-  canvasBrush.addEventListener('input', e => {
-  currentSize = e.target.value;
-  document.getElementById('canvasBrushValue').textContent = currentSize;
-});
-  canvasUndo.addEventListener('click', undoCanvas);
-  canvasRedo.addEventListener('click', redoCanvas);
+  canvasColor.addEventListener("change", (e) => {
+    currentColor = e.target.value;
+  });
+  canvasBrush.addEventListener("input", (e) => {
+    currentSize = e.target.value;
+    document.getElementById("canvasBrushValue").textContent = currentSize;
+  });
+  canvasUndo.addEventListener("click", undoCanvas);
+  canvasRedo.addEventListener("click", redoCanvas);
 }
 
 function canvasKeyHandler(e) {
   // Undo: Ctrl+Z or Cmd+Z
-  const isUndo = (e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'z';
+  const isUndo =
+    (e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === "z";
   // Redo: Ctrl+Shift+Z, Ctrl+Y, Cmd+Shift+Z
-  const isRedo = ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'z') || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y');
+  const isRedo =
+    ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "z") ||
+    ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "y");
 
   if (isUndo) {
     e.preventDefault();
@@ -215,35 +226,35 @@ function canvasKeyHandler(e) {
   }
 }
 
-openCanvasBtn.addEventListener('click', () => {
+openCanvasBtn.addEventListener("click", () => {
   showCanvasOverlay();
   // Save initial canvas state
   undoStack = [];
   redoStack = [];
   saveStateForUndo();
 });
-canvasClose.addEventListener('click', () => {
+canvasClose.addEventListener("click", () => {
   hideCanvasOverlay();
 });
-canvasClear.addEventListener('click', clearCanvas);
-canvasSave.addEventListener('click', saveCanvas);
+canvasClear.addEventListener("click", clearCanvas);
+canvasSave.addEventListener("click", saveCanvas);
 
 // Init on first overlay open
-canvasOverlay.addEventListener('transitionend', () => {
+canvasOverlay.addEventListener("transitionend", () => {
   // no-op (could be refined)
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Canvas setup
-  canvasElem = document.getElementById('canvasElem');
+  canvasElem = document.getElementById("canvasElem");
   if (canvasElem) {
-    canvasCtx = canvasElem.getContext('2d');
+    canvasCtx = canvasElem.getContext("2d");
     resizeCanvas();
     initCanvasEvents();
     // Template change event
-    const templateSelector = document.getElementById('canvasTemplate');
+    const templateSelector = document.getElementById("canvasTemplate");
     if (templateSelector) {
-      templateSelector.addEventListener('change', (e) => {
+      templateSelector.addEventListener("change", (e) => {
         currentTemplate = e.target.value;
         resizeCanvas();
       });
@@ -251,4 +262,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-window.addEventListener('resize', resizeCanvas);
+window.addEventListener("resize", resizeCanvas);

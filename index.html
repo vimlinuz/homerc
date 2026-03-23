@@ -1,115 +1,277 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
-  <title>Homepage</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
+    <title>Homepage</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="time">00:00</div>
 
-<div class="container">
+      <input
+        type="text"
+        id="search"
+        class="search-box"
+        placeholder="Search ..."
+        autofocus
+      />
 
-  <div id="time">00:00</div>
+      <button id="openCanvasBtn" class="links-btn">Canvas</button>
 
-  <input type="text" id="search" class="search-box" placeholder="Search ..." autofocus>
-
-  <button id="openCanvasBtn" class="links-btn">Canvas</button>
-
-  <div class="links">
-    <a href="https://duckduckgo.com" title="DuckDuckGo" style="display:flex;align-items:center;gap:6px;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="12" cy="12" rx="10" ry="9" fill="#e2e2e2"/>
-        <circle cx="12" cy="12" r="8" fill="#ffffff"/>
-        <ellipse cx="12" cy="13" rx="4.5" ry="3" fill="#ffa629"/>
-        <circle cx="10" cy="11" r="1" fill="#000"/>
-        <circle cx="14" cy="11" r="1" fill="#000"/>
-      </svg>
-      DuckDuckGo
-    </a>
-    <a href="https://www.youtube.com" title="YouTube" style="display:flex;align-items:center;gap:6px;">
-      <svg role="img" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      YouTube
-    </a>
-    <a href="https://github.com" title="GitHub" style="display:flex;align-items:center;gap:6px;">
-      <svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" fill="#1B1F23"/>
-      </svg>
-      GitHub
-    </a>
-    <a href="https://chat.openai.com/" title="ChatGPT" style="display:flex;align-items:center;gap:6px;">
-      ChatGPT
-    </a>
-    <a href="https://claude.ai/" title="Claude" style="display:flex;align-items:center;gap:6px;">
-      Claude
-    </a>
-  </div>
-
-</div>
-
-<!-- Canvas Overlay -->
-<div id="canvasOverlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1000;background:rgba(4,4,4,0.98);color:#fff;align-items:center;justify-content:center;">
-  <div style="width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-      <div style="margin-bottom:16px;">
-      <label style="margin-right:12px;">
-        <span>Template:</span>
-        <select id="canvasTemplate" style="margin-left:8px; padding:4px 6px; border-radius:4px; font-size:14px;">
-          <option value="blank">Blank</option>
-          <option value="lined">Lined Paper</option>
-          <option value="grid">Grid</option>
-          <option value="dots">Dots</option>
-        </select>
-      </label>
-      <label>
-        <span>Color:</span> <input type="color" id="canvasColor" value="#ffffff"
-          style="margin-right:16px;vertical-align:middle;" />
-      </label>
-      <label>
-        <span>Brush:</span>
-      <input type="range" id="canvasBrush" min="1" max="20" value="5" class="canvas-brush-range" style="margin-right:8px;vertical-align:middle;" />
-      <span id="canvasBrushValue" class="canvas-brush-value">5</span>
-      </label>
-      <button id="canvasUndo" class="links-btn canvas-btn-sm" title="Undo">
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14l-4-4 4-4"/><path d="M20 18v-2a4 4 0 00-4-4H5"/></svg>
-</button>
-<button id="canvasRedo" class="links-btn canvas-btn-sm" title="Redo">
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4 4-4 4"/><path d="M4 6v2a4 4 0 004 4h11"/></svg>
-</button>
-<button id="canvasClear" class="links-btn canvas-btn-sm" title="Clear">
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 6h18" />
-    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-    <rect x="5" y="6" width="14" height="16" rx="2" />
-    <line x1="10" y1="11" x2="10" y2="17" />
-    <line x1="14" y1="11" x2="14" y2="17" />
-  </svg>
-</button>
-<button id="canvasSave" class="links-btn canvas-btn-sm" title="Save">
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 5v12" />
-    <polyline points="6 13 12 19 18 13" />
-    <rect x="4" y="21" width="16" height="2" rx="1" />
-  </svg>
-</button>
-<button id="canvasClose" class="links-btn canvas-btn-sm" title="Close">
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="18" y1="6" x2="6" y2="18" />
-    <line x1="6" y1="6" x2="18" y2="18" />
-  </svg>
-</button>
+      <div class="links">
+        <a
+          href="https://duckduckgo.com"
+          title="DuckDuckGo"
+          style="display: flex; align-items: center; gap: 6px"
+        >
+          DuckDuckGo
+        </a>
+        <a
+          href="https://www.youtube.com"
+          title="YouTube"
+          style="display: flex; align-items: center; gap: 6px"
+        >
+          <svg
+            role="img"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>YouTube</title>
+            <path
+              d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+            />
+          </svg>
+          YouTube
+        </a>
+        <a
+          href="https://github.com"
+          title="GitHub"
+          style="display: flex; align-items: center; gap: 6px"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+              fill="#1B1F23"
+            />
+          </svg>
+          GitHub
+        </a>
+        <a
+          href="https://chat.openai.com/"
+          title="ChatGPT"
+          style="display: flex; align-items: center; gap: 6px"
+        >
+          ChatGPT
+        </a>
+        <a
+          href="https://claude.ai/"
+          title="Claude"
+          style="display: flex; align-items: center; gap: 6px"
+        >
+          Claude
+        </a>
+      </div>
     </div>
-    <canvas id="canvasElem" style="background:var(--panel);border-radius:10px;box-shadow:0 2px 18px #000;position:absolute;top:0;left:0;width:100vw;height:100vh;"></canvas>
-  </div>
-</div>
 
-<script src="js/script.js"></script>
-<script src="js/canvasTemplates.js"></script>
-<script src="js/canvas.js"></script>
-</body>
+    <!-- Canvas Overlay -->
+    <div
+      id="canvasOverlay"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1000;
+        background: rgba(4, 4, 4, 0.98);
+        color: #fff;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        style="
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <div style="margin-bottom: 16px">
+          <label style="margin-right: 12px">
+            <span>Template:</span>
+            <select
+              id="canvasTemplate"
+              style="
+                margin-left: 8px;
+                padding: 4px 6px;
+                border-radius: 4px;
+                font-size: 14px;
+              "
+            >
+              <option value="blank">Blank</option>
+              <option value="lined">Lined Paper</option>
+              <option value="grid">Grid</option>
+              <option value="dots">Dots</option>
+            </select>
+          </label>
+          <label>
+            <span>Color:</span>
+            <input
+              type="color"
+              id="canvasColor"
+              value="#ffffff"
+              style="margin-right: 16px; vertical-align: middle"
+            />
+          </label>
+          <label>
+            <span>Brush:</span>
+            <input
+              type="range"
+              id="canvasBrush"
+              min="1"
+              max="20"
+              value="5"
+              class="canvas-brush-range"
+              style="margin-right: 8px; vertical-align: middle"
+            />
+            <span id="canvasBrushValue" class="canvas-brush-value">5</span>
+          </label>
+          <button id="canvasUndo" class="links-btn canvas-btn-sm" title="Undo">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 14l-4-4 4-4" />
+              <path d="M20 18v-2a4 4 0 00-4-4H5" />
+            </svg>
+          </button>
+          <button id="canvasRedo" class="links-btn canvas-btn-sm" title="Redo">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 10l4 4-4 4" />
+              <path d="M4 6v2a4 4 0 004 4h11" />
+            </svg>
+          </button>
+          <button
+            id="canvasClear"
+            class="links-btn canvas-btn-sm"
+            title="Clear"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 6h18" />
+              <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+              <rect x="5" y="6" width="14" height="16" rx="2" />
+              <line x1="10" y1="11" x2="10" y2="17" />
+              <line x1="14" y1="11" x2="14" y2="17" />
+            </svg>
+          </button>
+          <button id="canvasSave" class="links-btn canvas-btn-sm" title="Save">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 5v12" />
+              <polyline points="6 13 12 19 18 13" />
+              <rect x="4" y="21" width="16" height="2" rx="1" />
+            </svg>
+          </button>
+          <button
+            id="canvasClose"
+            class="links-btn canvas-btn-sm"
+            title="Close"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <canvas
+          id="canvasElem"
+          style="
+            background: var(--panel);
+            border-radius: 10px;
+            box-shadow: 0 2px 18px #000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+          "
+        ></canvas>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/canvasTemplates.js"></script>
+    <script src="js/canvas.js"></script>
+  </body>
 </html>
-
-
-

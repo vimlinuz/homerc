@@ -23,12 +23,11 @@ updateTime();
 // Listen for Enter key in search box
 // Redirect to Google search with query
 
-document.getElementById("search").addEventListener("keydown", e => {
+document.getElementById("search").addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     const q = e.target.value.trim();
     if (q !== "") {
-      window.location.href =
-        `https://duckduckgo.com/?q=${encodeURIComponent(q)}`;
+      window.location.href = `https://duckduckgo.com/?q=${encodeURIComponent(q)}`;
     }
   }
 });

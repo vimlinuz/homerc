@@ -1,12 +1,12 @@
 // Modular Canvas Templates
 window.CanvasTemplates = {
-  blank: function(ctx, width, height) {
+  blank: function (ctx, width, height) {
     ctx.clearRect(0, 0, width, height);
   },
 
-  lined: function(ctx, width, height) {
+  lined: function (ctx, width, height) {
     ctx.clearRect(0, 0, width, height);
-    ctx.strokeStyle = '#e3e3e3';
+    ctx.strokeStyle = "#e3e3e3";
     ctx.lineWidth = 1;
     for (let y = 40; y < height; y += 40) {
       ctx.beginPath();
@@ -16,9 +16,9 @@ window.CanvasTemplates = {
     }
   },
 
-  grid: function(ctx, width, height) {
+  grid: function (ctx, width, height) {
     ctx.clearRect(0, 0, width, height);
-    ctx.strokeStyle = '#d0d0d0';
+    ctx.strokeStyle = "#d0d0d0";
     ctx.lineWidth = 1;
     for (let y = 40; y < height; y += 40) {
       ctx.beginPath();
@@ -34,9 +34,9 @@ window.CanvasTemplates = {
     }
   },
 
-  dots: function(ctx, width, height) {
+  dots: function (ctx, width, height) {
     ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = '#b0b0b0';
+    ctx.fillStyle = "#b0b0b0";
     for (let y = 20; y < height; y += 40) {
       for (let x = 20; x < width; x += 40) {
         ctx.beginPath();
@@ -44,5 +44,5 @@ window.CanvasTemplates = {
         ctx.fill();
       }
     }
-  }
+  },
 };
