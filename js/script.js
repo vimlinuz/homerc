@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const shortcutValue = document.getElementById("shortcutValue");
   const shortcutsList = document.getElementById("shortcutsList");
   const linksDiv = document.querySelector(".links");
+  const bgInput = document.getElementById("bgImageInput");
+  const bgPreview = document.getElementById("bgPreview");
+  const removeBgBtn = document.getElementById("removeBgBtn");
 
   function getShortcuts() {
     const raw = localStorage.getItem("userShortcuts");
@@ -115,7 +118,6 @@ document.addEventListener("DOMContentLoaded", function () {
     a.style.display = "flex";
     a.style.alignItems = "center";
     a.style.gap = "6px";
-    // (optional) Add an icon or initial for shortcuts
     return a;
   }
   function renderMainShortcuts() {
@@ -131,16 +133,59 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ---- BACKGROUND IMAGE MGMT ----
+  function setBackgroundImage(imgData) {
+    document.body.style.backgroundImage = imgData ? `url('${imgData}')` : "";
+    document.body.style.backgroundSize = imgData ? "cover" : "";
+    document.body.style.backgroundPosition = imgData ? "center" : "";
+    document.body.style.backgroundRepeat = imgData ? "no-repeat" : "";
+  }
+  function showBgPreview(imgData) {
+    if (bgPreview) {
+      if (imgData) {
+        bgPreview.innerHTML = `<img src="${imgData}" alt="bg preview" style="max-width:120px; max-height:80px; border-radius: 7px; box-shadow:0 2px 8px #0003;">`;
+      } else {
+        bgPreview.innerHTML = "";
+      }
+    }
+  }
+  // On load, check saved bg
+  const savedBg = localStorage.getItem("userBg");
+  if (savedBg) {
+    setBackgroundImage(savedBg);
+    showBgPreview(savedBg);
+  }
+  if (bgInput) {
+    bgInput.addEventListener("change", function (e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (evt) {
+        const result = evt.target.result;
+        localStorage.setItem("userBg", result);
+        setBackgroundImage(result);
+        showBgPreview(result);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  if (removeBgBtn) {
+    removeBgBtn.addEventListener("click", function () {
+      localStorage.removeItem("userBg");
+      setBackgroundImage("");
+      showBgPreview("");
+      if (bgInput) bgInput.value = "";
+    });
+  }
+
   if (settingsBtn && settingsModal && settingsClose) {
     settingsBtn.addEventListener("click", function () {
       settingsModal.style.display = "block";
       renderShortcuts();
     });
-
     settingsClose.addEventListener("click", function () {
       settingsModal.style.display = "none";
     });
-
     // Close modal on click outside content
     window.addEventListener("click", function (event) {
       if (event.target == settingsModal) {
@@ -148,7 +193,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
   // Add shortcut
   if (shortcutForm) {
     shortcutForm.addEventListener("submit", function (event) {
@@ -164,10 +208,8 @@ document.addEventListener("DOMContentLoaded", function () {
       renderMainShortcuts();
     });
   }
-
   // Render user shortcuts on startup
   renderMainShortcuts();
-
   // Google Search
   const searchBox = document.getElementById("search");
   if (searchBox) {
