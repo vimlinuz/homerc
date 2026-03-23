@@ -6,7 +6,7 @@ let currentTemplate = 'blank';
 let CanvasTemplates;
 (function loadTemplates() {
   const script = document.createElement('script');
-  script.src = 'canvasTemplates.js';
+  script.src = 'js/canvasTemplates.js';
   script.onload = () => { CanvasTemplates = CanvasTemplates || window.CanvasTemplates; };
   document.head.appendChild(script);
 })();
