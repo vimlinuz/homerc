@@ -13,9 +13,8 @@
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           nodejs
-          yarn
           pnpm
-          nodePackages.prettier
+          prettier
         ];
       };
     };
