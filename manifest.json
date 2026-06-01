@@ -17,8 +17,7 @@
   },
 
   "chrome_url_overrides": {
-    "newtab": "index.html",
-    "homepage": "index.html"
+    "newtab": "index.html"
   },
 
   "browser_specific_settings": {
