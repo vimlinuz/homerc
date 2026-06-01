@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "homerc",
+  "version": "1.0",
+
+  "developer": {
+    "name": "vimlinuz",
+    "url": "https://vimlinuz.is-a.dev/"
+  },
+
+  "homepage_url": "https://www.github.com/vimlinuz/homerc",
+  "description": "customizable browser homepage/startpage ",
+
+  "icons": {
+    "48": "icons/homerc.png",
+    "96": "icons/homerc.png"
+  },
+
+  "chrome_url_overrides": {
+    "newtab": "index.html",
+    "homepage": "index.html"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "homerc@mozilla.org",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}
